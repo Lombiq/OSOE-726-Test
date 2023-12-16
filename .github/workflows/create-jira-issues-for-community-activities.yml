@@ -1,0 +1,23 @@
+name: Create Jira issues for community activities
+
+on:
+  discussion:
+    types: [created]
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  create-jira-issues-for-community-activities:
+    name: Create Jira issues for community activities
+    uses: Lombiq/GitHub-Actions/.github/workflows/create-jira-issues-for-community-activities.yml@issue/OSOE-726
+    secrets:
+      JIRA_ENDPOINT_URL: ${{ secrets.DEFAULT_JIRA_ENDPOINT_URL }}
+      JIRA_API_KEY: ${{ secrets.DEFAULT_JIRA_API_KEY }}
+      JIRA_PROJECT_KEY: ${{ secrets.DEFAULT_JIRA_PROJECT_KEY }}
+      DISCUSSION_JIRA_ISSUE_DESCRIPTION: ${{ secrets.DEFAULT_DISCUSSION_JIRA_ISSUE_DESCRIPTION }}
+      ISSUE_JIRA_ISSUE_DESCRIPTION: ${{ secrets.DEFAULT_ISSUE_JIRA_ISSUE_DESCRIPTION }}
+      PULL_REQUEST_JIRA_ISSUE_DESCRIPTION: ${{ secrets.DEFAULT_PULL_REQUEST_JIRA_ISSUE_DESCRIPTION }}
+    with:
+      issue-component: OSOE-726 Test
