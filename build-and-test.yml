@@ -1,0 +1,16 @@
+name: Build and Test
+
+on:
+  pull_request:
+
+
+jobs:
+  post-pull-request-checks-automation:
+    name: Post Pull Request Checks Automation
+    needs: [build-and-test-larger-runners, build-and-test-nuget-test, spelling, powershell-static-code-analysis]
+    if: github.event.pull_request != ''
+    uses: Lombiq/GitHub-Actions/.github/workflows/post-pull-request-checks-automation.yml@issue/OSOE-726
+    secrets:
+      JIRA_ENDPOINT_URL: ${{ secrets.DEFAULT_JIRA_ENDPOINT_URL }}
+      JIRA_API_KEY: ${{ secrets.DEFAULT_JIRA_API_KEY }}
+      MERGE_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
